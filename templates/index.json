@@ -3,7 +3,7 @@
     "announcement_bar": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<style>.announcement-bar{background:#2a2a2a;color:white;text-align:center;padding:12px 15px;font-size:13px;font-family:'Assistant',sans-serif;direction:rtl;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw!important;margin-right:-50vw!important}.announcement-bar strong{color:#d4a574;font-weight:700}@media (max-width:768px){.announcement-bar{font-size:11px;padding:10px 12px}}</style><div class=\"announcement-bar\">משלוח חינם מעל <strong>₪199</strong> | החזרות חינם 30 יום ✨</div>",
+        "custom_liquid": "<style>.announcement-bar{background:#ff69b4;color:white;text-align:center;padding:12px 15px;font-size:13px;font-family:'Assistant',sans-serif;direction:rtl;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw!important;margin-right:-50vw!important}.announcement-bar strong{color:#d4a574;font-weight:700}@media (max-width:768px){.announcement-bar{font-size:11px;padding:10px 12px}}</style><div class=\"announcement-bar\">משלוח חינם מעל <strong>₪199</strong> | החזרות חינם 30 יום ✨</div>",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
