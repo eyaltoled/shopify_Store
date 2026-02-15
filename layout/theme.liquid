@@ -1,0 +1,213 @@
+<!doctype html>
+<html
+  lang="he"
+  dir="rtl"
+  {% if request.design_mode %}
+    class="shopify-design-mode"
+  {% endif %}
+>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    {%- if settings.favicon != blank -%}
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
+      >
+    {%- endif -%}
+
+    {%- render 'meta-tags' -%}
+    {%- render 'stylesheets' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-schemes' -%}
+
+    {% if request.design_mode %}
+      {%- render 'theme-editor' -%}
+    {% endif %}
+
+    <!-- Hebrew Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Assistant:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- RTL Beauty Styling - GRID FIX -->
+    <style>
+      /* ========================================
+         CRITICAL FIX: DISABLE GRID LAYOUT
+         ======================================== */
+      
+      /* Turn off display:grid that's causing the width issue */
+      body,
+      #MainContent,
+      .content-for-layout,
+      main {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      html, body {
+        overflow-x: hidden !important;
+      }
+
+      /* Force all page-width elements to 100% */
+      .page-width,
+      .page-width--narrow,
+      .page-width--full,
+      [class*="page-width"],
+      .container,
+      [class*="container"],
+      body.page-width-narrow .page-width {
+        max-width: none !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: block !important;
+      }
+
+      /* Override CSS variables */
+      :root {
+        --page-width: 100% !important;
+        --page-width-margin: 0 !important;
+        --page-width-narrow: 100% !important;
+      }
+
+      /* Force all sections to full width */
+      .shopify-section,
+      section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        display: block !important;
+      }
+
+      /* Force section children to full width */
+      .shopify-section > *,
+      .shopify-section > div {
+        max-width: none !important;
+        width: 100% !important;
+      }
+
+      /* ========================================
+         BEAUTY STORE STYLES
+         ======================================== */
+
+      :root {
+        --beauty-gold: #d4a574;
+        --beauty-gold-dark: #b8915f;
+        --beauty-cream: #f8f3ed;
+        --font-heading: 'Heebo', sans-serif;
+        --font-body: 'Assistant', 'Heebo', sans-serif;
+      }
+
+      html {
+        direction: rtl;
+      }
+
+      body {
+        font-family: var(--font-body);
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+      }
+
+      /* Buttons */
+      .button,
+      .btn,
+      button[type="submit"],
+      .shopify-payment-button__button--unbranded {
+        border-radius: 50px;
+        background: var(--beauty-gold);
+        color: white;
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      .button:hover,
+      .btn:hover,
+      button[type="submit"]:hover {
+        background: var(--beauty-gold-dark);
+        transform: translateY(-2px);
+      }
+
+      /* Header */
+      .header__heading-link {
+        color: var(--beauty-gold);
+        font-weight: 700;
+      }
+
+      /* Price */
+      .price,
+      .price__regular {
+        color: var(--beauty-gold);
+        font-weight: 700;
+      }
+
+      /* Product Cards */
+      .card-wrapper:hover {
+        transform: translateY(-8px);
+      }
+
+      /* Inputs */
+      input:focus,
+      textarea:focus {
+        border-color: var(--beauty-gold);
+      }
+    </style>
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      Skip to content
+    </a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">Choosing a selection results in a full page refresh.</li>
+      <li id="a11y-new-window-message">Opens in a new window.</li>
+    </ul>
+
+    <script>
+      window.shopUrl = '{{ routes.root_url }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}'
+      };
+
+      window.cartStrings = {
+        error: `There was an error while updating your cart. Please try again.`,
+        quantityError: `You can only add [quantity] of this item to your cart.`
+      }
+
+      window.variantStrings = {
+        addToCart: `Add to cart`,
+        soldOut: `Sold out`,
+        unavailable: `Unavailable`,
+      }
+    </script>
+  </body>
+</html>
